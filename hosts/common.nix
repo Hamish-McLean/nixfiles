@@ -49,7 +49,7 @@
       fish
       gh # Github
       git
-      # helix.packages."${pkgs.system}".helix
+      has
       htop
       nano
       fastfetch
@@ -57,7 +57,9 @@
       nh # Nix helper
       nixd
       nixfmt-rfc-style
+      # nixfmt-classic
       nmap
+      nushell
       onefetch
       pet
       tldr
