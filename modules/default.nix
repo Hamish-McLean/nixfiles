@@ -1,5 +1,7 @@
 {
+  inputs,
   lib,
+  system,
   ...
 }:
 {
