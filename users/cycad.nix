@@ -14,7 +14,7 @@
         "wheel"
       ];
       linger = true; 
-      shell = pkgs.fish;
+      shell = pkgs.nushell;
     };
   };
 }
