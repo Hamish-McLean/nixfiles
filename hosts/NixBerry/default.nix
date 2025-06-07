@@ -11,7 +11,7 @@
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../common.nix
     ../../users/cycad.nix
-    ../containers
+    ../../containers
     inputs.vscode-server.nixosModules.default
     inputs.vscodium-server.nixosModules.default
   ];

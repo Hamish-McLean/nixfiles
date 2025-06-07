@@ -20,9 +20,8 @@ let
   '';
 in
 {
-  options.services.traefik.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
+  options.traefik.enable = lib.mkEnableOption {
+    default = true;
     description = "Enable the Traefik reverse proxy with a Tailscale sidecar.";
   };
 
