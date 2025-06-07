@@ -7,7 +7,7 @@
 {
   imports = [
     ./catppuccin.nix
-    ./cosmic-de.nix
+    # ./cosmic-de.nix
     ./gaming.nix
     ./gnome.nix
     ./hyprland.nix

@@ -2,7 +2,7 @@
 {
   pkgs,
   username,
-  # inputs,
+  inputs,
   ...
 }:
 {
@@ -22,8 +22,8 @@
   };
 
   home = {
-    username = username;
-    homeDirectory = /home/${username};
+    username = username; #"cycad";
+    # homeDirectory = /home/cycad; # /home/${username};
   };
 
   # Fonts
@@ -51,10 +51,10 @@
     # };
   };
 
-  sops = {
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-    defaultSopsFile = secrets/secrets.yaml;
-  };
+  # sops = {
+  #   age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  #   defaultSopsFile = secrets/secrets.yaml;
+  # };
 
   xdg.enable = true;
 }

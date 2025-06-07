@@ -4,7 +4,9 @@
   Modules can be enabled or disabled here.
 */
 {
+  inputs,
   pkgs,
+  username,
   ...
 }:
 {

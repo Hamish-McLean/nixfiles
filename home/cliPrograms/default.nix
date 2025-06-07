@@ -5,8 +5,9 @@
   Modules are enabled by default so can be disabled by setting them to false.
 */
 {
-  lib,
   config,
+  inputs,
+  lib,
   pkgs,
   ...
 }:

@@ -101,40 +101,66 @@
     let
       nixosSystem =
         system: hostname: username:
-        # let
-        #   pkgs = import nixpkgs {
-        #     inherit system;
-        #     config.allowUnfree = true;
-        #   };
-        #   unstablePkgs = import nixpkgs-unstable {
-        #     inherit system;
-        #     config.allowUnfree = true;
-        #   };
-        # in
         nixpkgs.lib.nixosSystem {
           # pkgs = pkgs;
           inherit system;
           specialArgs = {
-            inherit inputs; # pkgs unstablePkgs;
-            customArgs = { inherit system hostname username; };
+            inherit inputs system hostname username;
+            # customArgs = { inherit system hostname username; };
           };
           modules = [
+            # Overlays
             {
               nixpkgs.config.allowUnfree = true;
-              # Overlay to make unstable packages available as `pkgs.unstable.<package>`
               nixpkgs.overlays = [
-                # This overlay adds an 'unstable' attribute to pkgs,
-                # which contains packages from the nixpkgs-unstable input.
+                # Overlay to make unstable packages available as `pkgs.unstable.<package>`
                 (final: prev: {
                   unstable = import nixpkgs-unstable {
                     inherit system;
                     config.allowUnfree = true; # Allow unfree in unstable pkgs as well
                   };
                 })
+                inputs.hyprpanel.overlay
               ];
             }
+            # Modules
             ./hosts/${hostname}
             ./hosts/common.nix
+
+            # home-manager
+            inputs.home-manager.nixosModules.home-manager {
+              home-manager.users.${username} = 
+                { config, pkgs, lib, inputs, system, hostname, username, ... }:
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  imports = [
+                    # ./home
+                    ./home/hosts/${hostname}.nix
+                    # (import ./home/hosts/${hostname}.nix {
+                    #   inherit system hostname username;
+                    # })
+                    # (import ./home/cliPrograms {
+                    #   inherit config pkgs lib inputs system hostname username;
+                    # })
+                    # (import ./home/guiPrograms {
+                    #   inherit config pkgs lib inputs system hostname username;
+                    # })
+                    inputs.catppuccin.homeModules.catppuccin
+                    # inputs.cosmic-manager.homeManagerModules.cosmic-manager
+                    # inputs.hyprland.homeManagerModules.default # Switched to nixpkgs version for now
+                    inputs.hyprpanel.homeManagerModules.hyprpanel
+                    inputs.nixcord.homeModules.nixcord
+                    inputs.nixvim.homeManagerModules.nixvim
+                    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                    inputs.nvf.homeManagerModules.default
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                    inputs.rofi-applets.homeManagerModules.default
+                    inputs.sops-nix.homeManagerModules.sops
+                    inputs.spicetify-nix.homeManagerModules.default
+                  ];
+                };
+            }
           ];
         };
 

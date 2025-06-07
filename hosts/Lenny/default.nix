@@ -67,7 +67,7 @@
 
   # Desktop environments
   sddm.enable = true;
-  cosmic.enable = false;
+  # cosmic.enable = false;
   gnome.enable = true;
   hyprland.enable = true;
   kde.enable = false;

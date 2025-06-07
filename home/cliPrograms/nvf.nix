@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ inputs.nvf.homeManagerModules.default ];
+  # imports = [ inputs.nvf.homeManagerModules.default ];
 
   options = {
     nvf.enable = lib.mkEnableOption "enables nvf";
