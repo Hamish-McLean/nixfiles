@@ -9,6 +9,7 @@
       description = "Hamish McLean";
       extraGroups = [
         "adbusers"
+        "docker"
         "input"
         "networkmanager"
         "wheel"
